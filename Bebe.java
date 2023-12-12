@@ -1,9 +1,11 @@
+import java.time.LocalDate;
+
 public class Bebe{
 	private String nome;
 	private int cpf;
-	private String dataNasc;
+	private LocalDate dataNasc;
 	
-	public Bebe (String nome, int cpf, String dataNasc) {
+	public Bebe (String nome, int cpf,LocalDate dataNasc) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.dataNasc = dataNasc;
@@ -17,7 +19,7 @@ public class Bebe{
 		return cpf;
 	}
 	
-	public String getdataNasc() {
+	public LocalDate getdataNasc() {
 		return dataNasc;
 	}
 	
@@ -29,7 +31,7 @@ public class Bebe{
 		this.cpf = cpf;
 	}
 	
-	public void setDataNasc(String dataNasc) {
+	public void setDataNasc(LocalDate dataNasc) {
 		this.dataNasc = dataNasc;
 	}
 }
