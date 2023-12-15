@@ -111,7 +111,7 @@ public class Main {
 						case 2:
 							if (bebes.get(intAux).getHepatite_B() != 1) {
 								System.out.println("Dose resgistrada com sucesso.");
-								bebes.get(intAux).setBCG(1);
+								bebes.get(intAux).setHepatite_B(1);
 							} else {
 								System.err.println("Dose única já registrada, operação cancelada.");
 								break;
