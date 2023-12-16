@@ -1,22 +1,23 @@
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.ArrayList;
 
+
 public class Main {
 	public static void main(String[] args) {
-
 		boolean auxB = true;
 		boolean auxB2 = true;
 		int menu;
 
-		ArrayList<Bebe> bebes = new ArrayList<Bebe>();
+		Main programa = new Main();
+		ArrayList<Bebe> bebes = programa.carregarDados();
 
 		Scanner scanner = new Scanner(System.in);
 		DateTimeFormatter formatarData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -31,7 +32,7 @@ public class Main {
 			System.out.println("3: Exibir registros");
 			System.out.println("4: Consultar bebês com doses ou reforços pendentes.");
 			System.out.println("5: Consultar bebês com doses pendentes por vacina.");
-			System.out.println("6: Encerrar o programa e salvar dados.");
+			System.out.println("0: Encerrar o programa e salvar dados.");
 			System.out.println("------------------------------------------------------");
 			menu = scanner.nextInt();
 
@@ -122,15 +123,16 @@ public class Main {
 						case 3:
 							int dose = bebes.get(intAux).getPentaDTP();
 							int mesNasc = bebes.get(intAux).getdataNasc().getMonthValue();
-							if ((12 - mesNasc) >= 2 && dose == 0) {
+							int anoNasc = bebes.get(intAux).getdataNasc().getYear();
+							if (((12 - mesNasc) >= 2||(2023-anoNasc)>= 1) && dose == 0) {
 								System.out.println("Dose registrada com sucesso.");
 								bebes.get(intAux).setPentaDTP(1);
 								break;
-							} else if ((12 - mesNasc) >= 4 && dose == 1) {
+							} else if (((12 - mesNasc) >= 4||(2023-anoNasc)>= 1) && dose == 1) {
 								System.out.println("Dose registrada com sucesso.");
 								bebes.get(intAux).setPentaDTP(2);
 								break;
-							} else if ((12 - mesNasc) >= 6 && dose == 2) {
+							} else if (((12 - mesNasc) >= 6||(2023-anoNasc)>= 1) && dose == 2) {
 								System.out.println("Dose registrada com sucesso.");
 								bebes.get(intAux).setPentaDTP(3);
 								break;
@@ -141,22 +143,23 @@ public class Main {
 							pressioneEnter();
 							break;
 						case 4:
-							int anoNasc = bebes.get(intAux).getdataNasc().getYear();
+							int anoNasc1 = bebes.get(intAux).getdataNasc().getYear();
 							int dose1 = bebes.get(intAux).getVIP_VOP();
 							int mesNasc1 = bebes.get(intAux).getdataNasc().getMonthValue();
-							if ((12 - mesNasc1) >= 2 && dose1 == 0) {
+							
+							if (((12 - mesNasc1) >= 2||(2023-anoNasc1)>= 1) && dose1 == 0) {
 								System.out.println("Dose registrada com sucesso.");
 								bebes.get(intAux).setVIP_VOP(1);
 								break;
-							} else if ((12 - mesNasc1) >= 4 && dose1 == 1) {
+							} else if (((12 - mesNasc1) >= 4||(2023-anoNasc1)>= 1) && dose1 == 0) {
 								System.out.println("Dose registrada com sucesso.");
 								bebes.get(intAux).setVIP_VOP(2);
 								break;
-							} else if ((12 - mesNasc1) >= 6 && dose1 == 2) {
+							} else if (((12 - mesNasc1) >= 6||(2023-anoNasc1)>= 1) && dose1 == 0) {
 								System.out.println("Dose registrada com sucesso.");
 								bebes.get(intAux).setVIP_VOP(3);
 								break;
-							} else if ((anoNasc - 2023) >= 1 && dose1 == 3) {
+							} else if ((anoNasc1 - 2023) >= 1 && dose1 == 3) {
 								System.out.println("Dose registrada com sucesso.");
 								bebes.get(intAux).setVIP_VOP(4);
 								break;
@@ -168,22 +171,23 @@ public class Main {
 							break;
 
 						case 5:
-							int anoNasc1 = bebes.get(intAux).getdataNasc().getYear();
+							int anoNasc2 = bebes.get(intAux).getdataNasc().getYear();
 							int dose2 = bebes.get(intAux).getMeningococica();
 							int mesNasc2 = bebes.get(intAux).getdataNasc().getMonthValue();
-							if ((mesNasc2 - 12) >= 2 && dose2 == 0) {
+							
+							if (((12 - mesNasc2) >= 2||(2023-anoNasc2)>= 1) && dose2 == 0) {
 								System.out.println("Dose registrada com sucesso.");
 								bebes.get(intAux).setMeningococica(1);
 								break;
-							} else if ((mesNasc2 - 12) >= 4 && dose2 == 1) {
+							} else if (((12 - mesNasc2) >= 3||(2023-anoNasc2)>= 1) && dose2 == 0) {
 								System.out.println("Dose registrada com sucesso.");
 								bebes.get(intAux).setMeningococica(2);
 								break;
-							} else if ((mesNasc2 - 12) >= 6 && dose2 == 2) {
+							} else if (((12 - mesNasc2) >= 5||(2023-anoNasc2)>= 1) && dose2 == 0) {
 								System.out.println("Dose registrada com sucesso.");
 								bebes.get(intAux).setMeningococica(3);
 								break;
-							} else if ((anoNasc1 - 2023) >= 1 && dose2 == 3) {
+							} else if ((anoNasc2 - 2023) >= 1 && dose2 == 3) {
 								System.out.println("Dose registrada com sucesso.");
 								bebes.get(intAux).setMeningococica(4);
 								break;
@@ -203,23 +207,25 @@ public class Main {
 					consultarBebesPendentes(bebes);
 					break;
 				case 5:
-					//consultarBebesPendentesPorVacina(bebes);
+					consultarBebesPendentesPorVacina(bebes);
 					break;
 
-				case 6:
+				case 0:
 					System.out.println("Programa encerrado.");
+					scanner.close();
 					try {
-						Iterator<Bebe> it = bebes.iterator();
 						PrintWriter fluxoArquivo = new PrintWriter("crianca.txt");
-
-						while (it.hasNext()) {
-							Bebe be = it.next();
-							fluxoArquivo.print(be.getNome() + "|");
-							fluxoArquivo.print(be.getCpf() + "|");
-							fluxoArquivo.print(be.getdataNasc() + System.lineSeparator());
+						for (Bebe bebe: bebes){
+							fluxoArquivo.print(bebe.getNome() + "|");
+							fluxoArquivo.print(bebe.getCpf() + "|");
+							fluxoArquivo.print(bebe.getdataNasc() + "|");
+							fluxoArquivo.print(bebe.getBCG() + "|");
+							fluxoArquivo.print(bebe.getHepatite_B() + "|");
+							fluxoArquivo.print(bebe.getPentaDTP() + "|");
+							fluxoArquivo.print(bebe.getVIP_VOP() + "|");
+							fluxoArquivo.print(bebe.getMeningococica() + System.lineSeparator());
 						}
 						fluxoArquivo.close();
-
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -239,25 +245,38 @@ public class Main {
 		pressioneEnter();
 		limparConsole();
 	}
-
 	// Método para consultar bebês com doses pendentes por vacina
-	/*private static void consultarBebesPendentesPorVacina(ArrayList<Bebe> bebes) {
+	private static void consultarBebesPendentesPorVacina(ArrayList<Bebe> bebes) {
 		Scanner scanner = new Scanner(System.in);
 
 		System.out.println("Escolha a vacina para consulta:");
 		System.out.println("1: BCG\n2: Hepatite B\n3: Penta/DTP\n4: VIP/VOP\n5: Meningocócica");
 		int escolhaVacina = scanner.nextInt();
+		String nomeVacina = "";
+		
+		if (escolhaVacina == 1) {
+			nomeVacina = "BCG";
+		}else if (escolhaVacina == 2) {
+			nomeVacina = "Hepatite B";
+		}else if (escolhaVacina == 3) {
+			nomeVacina = "Penta/DTP";
+		}else if (escolhaVacina == 4) {
+			nomeVacina = "VIP/VOP";
+		}else if (escolhaVacina == 5) {
+			nomeVacina = "Meningocócica";
+		}
+
+		System.out.println("------------------------------------------------------");
+		System.out.println("Bebes com a vacina '" + nomeVacina + "' Pendentes");
         
 		for (Bebe bebe : bebes) {
 			if (bebe.temDosePendentePorVacina(escolhaVacina)) {
-				System.out.println("Nome: " + bebe.getNome() +
-						"\nCPF: " + bebe.getCpf() +
-						"\nDose pendente para a vacina escolhida.");
+				System.out.println("Nome: " + bebe.getNome() + "\nCPF: " + bebe.getCpf());
 				System.out.println("------------------------------------------------------");
 			}
 		}
 		pressioneEnter();
-	}*/
+	}
 
 	public final static void limparConsole() {
 		try {
@@ -272,7 +291,6 @@ public class Main {
 				System.out.flush();
 			}
 		} catch (Exception e) {
-			// Trate as exceções, se houver
 			System.out.println("Erro ao tentar limpar o console: " + e.getMessage());
 		}
 	}
@@ -305,4 +323,29 @@ public class Main {
             System.out.println("-----------------------");
         }
     }
+
+	private ArrayList<Bebe> carregarDados() {
+    ArrayList<Bebe> bebes = new ArrayList<Bebe>();
+    try {
+        FileReader fluxoArquivo = new FileReader("crianca.txt");
+        Scanner fluxo = new Scanner(fluxoArquivo);
+        while (fluxo.hasNext()) {
+            String linha = fluxo.nextLine();
+
+            String[] partes = linha.split("\\|");
+            DateTimeFormatter formatarData = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate dataNascFormatada = LocalDate.parse(partes[2], formatarData);
+            bebes.add(new Bebe(partes[0], partes[1], dataNascFormatada, Integer.parseInt(partes[3]),
+                    Integer.parseInt(partes[4]), Integer.parseInt(partes[5]), Integer.parseInt(partes[6]),
+                    Integer.parseInt(partes[7])));
+            System.out.println(linha);
+        }
+        fluxo.close();
+        fluxoArquivo.close();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+
+    return bebes;
+	}
 }

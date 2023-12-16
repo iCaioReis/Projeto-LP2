@@ -16,6 +16,17 @@ public class Bebe{
 		this.cpf = cpf;
 		this.dataNasc = dataNasc;
 	}
+
+	public Bebe (String nome, String cpf, LocalDate dataNasc, int BCG, int Hepatite_B, int PentaDTP, int VIP_VOP, int Meningococica) {
+		this.nome = nome;
+		this.cpf = cpf;
+		this.dataNasc = dataNasc;
+		this.BCG = BCG;
+		this.Hepatite_B = Hepatite_B;
+		this.PentaDTP = PentaDTP;
+		this.VIP_VOP = VIP_VOP;
+		this.Meningococica = Meningococica;
+	}
 	
 	public String getNome() {
 		return nome;
@@ -86,7 +97,24 @@ public class Bebe{
         return getBCG() != 1 || getHepatite_B() != 1 || getPentaDTP() < 3 || getVIP_VOP() < 4 || getMeningococica() < 4;
     }
 
-    
+	public boolean temDosePendentePorVacina(int escolhaVacina) {
+        switch (escolhaVacina) {
+            case 1:
+                return getBCG() != 1;
+            case 2:
+                return getHepatite_B() != 1;
+            case 3:
+                return getPentaDTP() < 3;
+            case 4:
+                return getVIP_VOP() < 4;
+            case 5:
+                return getMeningococica() < 4;
+            default:
+                System.err.println("Escolha de vacina inválida.");
+                return false;
+        }
+    }
+
     public void dosesPendentes() {
 		System.out.println("Vacinas pendentes: ");
 		if (this.getBCG() < 1) {
